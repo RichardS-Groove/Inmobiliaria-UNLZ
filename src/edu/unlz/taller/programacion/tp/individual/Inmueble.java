@@ -9,7 +9,7 @@ public class Inmueble implements Imprimible {
      */
     private String domicilio;
     private Integer superficie;
-    private double precio;
+    private Double precio;
     private boolean reservado;
     private boolean vendido;
     private Cliente propietario;
@@ -33,6 +33,87 @@ public class Inmueble implements Imprimible {
         this.setPropietario(propietario);
     }
 
+
+    /**
+     * Se imprime los atributos de la clase y el objeto Cliente.
+     */
+    @Override
+    public void imprimirDatos() {
+        System.out.println("\nInmueble" +
+                "\n\nDomicilio: " + getDomicilio() +
+                "\nSuperficie: " + getSuperficie() +
+                "\nPrecio: " + getPrecio() +
+                "\nReservado: " + isReservado() +
+                "\nVendido: " + isVendido());
+        propietario.imprimirDatos();
+    }
+
+    /**
+     * Se implementa un metodo para poder agregar o cambiar la comisión.
+     *
+     * @param comision
+     * @return
+     */
+    public Double beneficioObtenido(Double comision) {
+        return this.precio * comision;
+    }
+
+
+    /**
+     * Se mejora el metodo Equals
+     * Condicónes:
+     * 1) Que pertenezca a la misma instancia
+     * 2) Que tenga los mismos atributos a la clase
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        if (o instanceof Cliente)
+            return true;
+
+        Inmueble inmueble = (Inmueble) o;
+
+        return Double.compare(inmueble.precio, precio) == 0 &&
+                reservado == inmueble.reservado &&
+                vendido == inmueble.vendido &&
+                Objects.equals(domicilio, inmueble.domicilio) &&
+                Objects.equals(superficie, inmueble.superficie) &&
+                Objects.equals(propietario, inmueble.propietario);
+    }
+
+    /**
+     * Se implementa en contains.
+     *
+     * @param o
+     * @return
+     */
+    public boolean contains(Inmueble o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        Inmueble inmueble = (Inmueble) o;
+
+        return Double.compare(inmueble.precio, precio) == 0 &&
+                reservado == inmueble.reservado &&
+                vendido == inmueble.vendido &&
+                Objects.equals(domicilio, inmueble.domicilio) &&
+                Objects.equals(superficie, inmueble.superficie) &&
+                Objects.equals(propietario, inmueble.propietario);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(domicilio, superficie, precio, reservado, vendido, propietario);
+    }
+
     /**
      * Se declara los Getter & Setter
      *
@@ -43,11 +124,6 @@ public class Inmueble implements Imprimible {
     }
 
     public void setDomicilio(String domicilio) {
-        if (domicilio != null) {
-            this.domicilio = domicilio;
-        } else {
-            System.out.println("DEBE COMPLETAR UN DOMICILIO");
-        }
         this.domicilio = domicilio;
     }
 
@@ -56,24 +132,14 @@ public class Inmueble implements Imprimible {
     }
 
     public void setSuperficie(Integer superficie) {
-        if (superficie != null) {
-            this.superficie = superficie;
-        } else {
-            System.out.println("LA SUPERFICIE INGRESADA NO ES LA CORRECTA");
-        }
         this.superficie = superficie;
     }
 
-    public double getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
-        if (precio > 0) {
-            this.precio = precio;
-        } else {
-            System.out.println("EL PRECIO DEBE SER MAYOR A CERO");
-        }
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
@@ -98,55 +164,8 @@ public class Inmueble implements Imprimible {
     }
 
     public void setPropietario(Cliente propietario) {
-        if (propietario != null) {
-            if (propietario.equals(propietario)) {
-                this.propietario = propietario;
-            } else {
-                System.out.println("EL OBJETO NO PERTENECE A LA CLASE DE CLIENTE");
-            }
-        } else {
-            System.out.println("OBJETO IBGRESADO ESTAVACIO");
-        }
         this.propietario = propietario;
     }
 
 
-    @Override
-    public void imprimirDatos() {
-        System.out.println("\n\nObj Inmueble --->" +
-                "\n\nDomicilio: " + getDomicilio() +
-                "\nSuperficie: " + getSuperficie() +
-                "\nPrecio: " + getPrecio() +
-                "\nReservado: " + isReservado() +
-                "\nVendido: " + isVendido() +
-                "\n\nCliente " +
-                "\nNombre: " + propietario.getNombre() +
-                "\nTélefono: " + propietario.getTelefono() +
-                "\nCorreo: " + propietario.getCorreo() +
-                "\n");
-    }
-
-    /**
-     * Se valida que pertenezca a la misma instancia
-     *
-     * @param o
-     * @return
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        if (o instanceof Cliente) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(propietario);
-    }
 }

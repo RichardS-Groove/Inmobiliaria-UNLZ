@@ -1,17 +1,18 @@
 package edu.unlz.taller.programacion.tp.individual;
 
-import java.util.ArrayList;
+import java.util.*;
 
-public class Inmobiliaria implements Imprimible {
+public class Inmobiliaria extends Exception implements Imprimible, Constantes {
 
     /**
-     * Atributos
+     * Se declara los atributos de la clase
      */
     private String nombre;
     private Integer cantidadDeInmuebles;
     private Integer maximoDeInmuebles = 98;
     private double comision;
-    private ArrayList<Inmueble> inmuebles;
+    private Set<Inmueble> inmuebles;
+
 
     /**
      * Constructor
@@ -20,11 +21,111 @@ public class Inmobiliaria implements Imprimible {
      * @param cantidadDeInmuebles
      * @param comision
      */
-    public Inmobiliaria(String nombre, Integer cantidadDeInmuebles, double comision) {
+    public Inmobiliaria(String nombre, Integer cantidadDeInmuebles, double comision) { //120
         this.nombre = nombre;
         this.cantidadDeInmuebles = cantidadDeInmuebles;
         this.comision = comision;
-        this.inmuebles = new ArrayList<Inmueble>();
+        this.inmuebles = new HashSet<>();
+    }
+
+    /**
+     * Metodo Agregar Inmueble
+     * Lógica: Se agrega por Objeto
+     *
+     * @param inmueble
+     */
+    public void agregarInmueble(Inmueble inmueble) throws YaExisteInmuebleException {
+        try {
+            agregarInmuebleThrows(inmueble);
+        } catch (YaExisteInmuebleException e) {
+            System.out.println("\n\nYaExisteInmuebleException");
+        } finally {
+        }
+
+    }
+
+    public void agregarInmuebleThrows(Inmueble inmueble) throws YaExisteInmuebleException {
+        if (inmueble != null) {
+            for (Inmueble x : this.inmuebles) {
+                if (x.contains(inmueble)) {
+                    throw new YaExisteInmuebleException();
+                }
+            }
+            inmuebles.add(inmueble);
+        }
+
+    }
+
+
+    /**
+     * Metodo Eliminar Inmueble
+     * Vericaciones:
+     * 1) Valida que no sea null
+     * 2) Valida que el array contenga el obj que ingresara
+     * 3) Valida que el inmueble no esté vacios (Es obsoleto y esta demas ponerlo - Pero ayuda a saber para que sirve)
+     *
+     * @param obj
+     */
+    public void eliminarInmueble(Inmueble obj) {
+        if (obj != null && inmuebles.contains(obj) && inmuebles.isEmpty()) {
+            inmuebles.remove(obj);
+        }
+    }
+
+    /**
+     * Metodo Beneficio Esperado!
+     * Condición: No incluir inmuebles vendidos
+     * Lógica: Precio * Comisión
+     *
+     * @return
+     */
+    public double beneficioEsperado() {
+        double total = 0.0;
+        for (Inmueble inmueble : this.inmuebles) {
+            if (inmueble != null && !inmueble.isVendido()) {
+                total += (inmueble.getPrecio() * getComision());
+            }
+        }
+        return total;
+    }
+
+    /**
+     * Metodo Beneficio Obtenido.
+     * Se varifica si esta vendido o si esta reservado
+     * Se realiza un suma de la comisión agregaga en el metofo de beneficioObtenido.
+     *
+     * @return
+     */
+    public Double beneficioObtenido() {
+        Double beneficioObtenido = 0.0;
+        for (Inmueble unInmueble : this.inmuebles) {
+            if (unInmueble.isVendido() || unInmueble.isReservado()) {
+                beneficioObtenido += unInmueble.beneficioObtenido(this.comision);
+            }
+        }
+        return beneficioObtenido;
+    }
+
+
+    /**
+     * Imprimimos los atributos y declaramos un lopp para poder recorrer el array que tenemos en la clase.
+     * Se implimenta el Comparator para las colecciónes Set
+     */
+    @Override
+    public void imprimirDatos() {
+        System.out.println("\n\nInmobiliaria" +
+                "\n\nNombre: " + this.nombre +
+                "\nCantidad De Inmuebles: " + this.cantidadDeInmuebles +
+                "\nMaximo De Inmuebles: " + this.maximoDeInmuebles +
+                "\nComision: " + this.comision);
+
+        Set<Inmueble> ss = new TreeSet<>(new InmuebleOrdenPrecioComparator());
+        ss.addAll(inmuebles);
+
+        for (Inmueble s : ss) {
+            s.imprimirDatos();
+        }
+
     }
 
     /**
@@ -64,81 +165,4 @@ public class Inmobiliaria implements Imprimible {
         this.comision = comision;
     }
 
-    /**
-     * Metodos
-     */
-
-    public void agregarInmueble(Inmueble inmueble) {
-        if (inmueble != null) {
-            inmuebles.add(inmueble);
-        } else {
-            System.out.println("EL OBJETO INMUEBLE ESTA VACIO");
-        }
-    }
-
-    public void eliminarInmueble(String domicilio) {
-        for (int i = 0; i < inmuebles.size(); i++) {
-            if (inmuebles.get(i).getDomicilio().equals(domicilio)) {
-                inmuebles.remove(i);
-                i = i - 1;
-            }
-        }
-    }
-
-    public double beneficioEsperado() {
-        double total = 0.0;
-        for (Inmueble inmueble : this.inmuebles) {
-            if (inmueble != null) {
-                if (inmueble.isVendido() != true) {
-                    total += (inmueble.getPrecio() * getComision());
-                }
-            }
-        }
-        return total;
-
-    }
-
-    public double beneficioObtenido() {
-        double total = 0.0;
-        double total1 = 0.0;
-        for (Inmueble inmueble : this.inmuebles) {
-            if (inmueble != null) {
-                if (inmueble.isReservado() == true && inmueble.isVendido() == true) {
-                    if (inmueble instanceof InmuebleTechado) {
-                        InmuebleTechado inmuebletechado = (InmuebleTechado) inmueble;
-                        if (((InmuebleTechado) inmueble).isTienePiscina() == true) {
-                            double porcet = 0;
-                            porcet = ((inmueble.getPrecio() * getComision()) * 0.05);
-                            total += ((inmueble.getPrecio() * getComision()) + porcet);
-                        } else if (((InmuebleTechado) inmueble).isTieneCochera() == true) {
-                            double porcet = 0;
-                            porcet = ((inmueble.getPrecio() * getComision()) * 0.06);
-                            total1 += ((inmueble.getPrecio() * getComision()) + porcet);
-                        }
-
-                    }
-                }
-            }
-        }
-        return total + total1;
-    }
-
-
-    @Override
-    public void imprimirDatos() {
-        System.out.println("\n\nInmobiliaria --->" +
-                "\n\nNombre: " + this.nombre +
-                "\nCantidad De Inmuebles: " + this.cantidadDeInmuebles +
-                "\nMaximo De Inmuebles: " + this.maximoDeInmuebles +
-                "\nComision: " + this.comision +
-                "\n");
-
-        for (Inmueble inmueble : this.inmuebles) {
-            inmueble.imprimirDatos();
-        }
-
-    }
-
-
 }
-

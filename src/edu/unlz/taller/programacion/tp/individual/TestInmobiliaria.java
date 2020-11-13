@@ -6,7 +6,13 @@ public class TestInmobiliaria {
 
     public static void main(String[] args) throws YaExisteInmuebleException {
 
-        Cliente cliente = new Cliente("RichardS", "1161564480", "richardsjcb@gmail.com");
+        WindowDesing windowDesing = new WindowDesing();
+        windowDesing.setTitle("Ventana de prueba");
+        windowDesing.pack();
+        windowDesing.setLocationRelativeTo(null);
+        windowDesing.setVisible(true);
+
+       /* Cliente cliente = new Cliente("RichardS", "1161564480", "richardsjcb@gmail.com");
         Inmueble inmueble = new Inmueble("Emilio Castro 6012", 1250, 350, true, false, cliente); // Beneficio esperado
         InmuebleTechado inmuebleTechado = new InmuebleTechado(4, true, false, "Los angeles", 120, 856, true, true, cliente); // Beneficio obtenido
         Inmobiliaria inmobiliaria = new Inmobiliaria("Los Campos", 35, 160);
@@ -30,7 +36,7 @@ public class TestInmobiliaria {
         inmobiliaria.imprimirDatos();
 
 
-        /* Se agrega un nuevo objeto */
+        *//* Se agrega un nuevo objeto *//*
         Cliente cliente1 = new Cliente("Emilia", "1165897445", "emilia@Outlook.com");
         Inmueble inmueble1 = new Inmueble("Jose Mariano 1658", 1548, 350, true, false, cliente1);
         Inmueble inmueble2 = new Inmueble("Jose Mariano 1658", 1548, 350, true, false, cliente1);
@@ -41,11 +47,7 @@ public class TestInmobiliaria {
         inmobiliaria.imprimirDatos();
 
 
-        System.out.println("\n************************Se agrega nuevo inmueble");
-
-
-
-
+        System.out.println("\n************************Se agrega nuevo inmueble");*/
 
     }
 

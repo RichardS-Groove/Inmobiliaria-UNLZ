@@ -1,4 +1,4 @@
-Inmobiliaria - Uiversidad Lomas de Zamora - Project of Class Java
+Inmobiliaria - UNLZ - Project of Class Java
 ===================
 
 En la presente versión se agrega el cambio de funcionalidades en los metodos. 

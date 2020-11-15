@@ -30,7 +30,7 @@ public class InmuebleTechado extends Inmueble implements Imprimible, Constantes 
     }
 
     /**
-     * Se sobreescribe el metodo para poder ser usado con inmueble Techado !
+     * Se sobre escribe el metodo, este metodo toma los valores principales del super().
      *
      * @param comision
      * @return

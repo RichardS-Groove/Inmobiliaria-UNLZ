@@ -29,8 +29,9 @@ public class Inmobiliaria extends Exception implements Imprimible, Constantes {
     }
 
     /**
-     * Metodo Agregar Inmueble
-     * Lógica: Se agrega por Objeto
+     * Se mejora el metodo de agregar inmueble en la versión 2.
+     * El emtodo realiza un bucle buscando que el inmueble ingresado no sea lo smismo en todos los campos,
+     * el contains valida que no se repitan los atributos de la clase.
      *
      * @param inmueble
      */

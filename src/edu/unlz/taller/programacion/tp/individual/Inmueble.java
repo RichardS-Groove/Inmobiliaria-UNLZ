@@ -90,28 +90,6 @@ public class Inmueble implements Imprimible {
                 Objects.equals(propietario, inmueble.propietario);
     }
 
-    /**
-     * Se implementa en contains.
-     *
-     * @param o
-     * @return
-     */
-    public boolean contains(Inmueble o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-
-        Inmueble inmueble = (Inmueble) o;
-
-        return Double.compare(inmueble.precio, precio) == 0 &&
-                reservado == inmueble.reservado &&
-                vendido == inmueble.vendido &&
-                Objects.equals(domicilio, inmueble.domicilio) &&
-                Objects.equals(superficie, inmueble.superficie) &&
-                Objects.equals(propietario, inmueble.propietario);
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(domicilio, superficie, precio, reservado, vendido, propietario);

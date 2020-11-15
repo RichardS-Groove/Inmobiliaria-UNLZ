@@ -33,18 +33,16 @@ public class Inmobiliaria extends Exception implements Imprimible, Constantes {
      * El emtodo realiza un bucle buscando que el inmueble ingresado no sea lo smismo en todos los campos,
      * el contains valida que no se repitan los atributos de la clase.
      *
-     * @param inmueble
+     * El constains es un metodo que nos proporciona collection, con
+     *
+     * @param obj
      */
-    public void agregarInmueble(Inmueble inmueble) throws YaExisteInmuebleException {
+    public void agregarInmueble(Inmueble obj) throws YaExisteInmuebleException {
         try {
-            if (inmueble != null) {
-                for (Inmueble x : this.inmuebles) {
-                    if (x.contains(inmueble)) {
-                        throw new YaExisteInmuebleException();
-                    }
-                }
-                inmuebles.add(inmueble);
+            if (obj != null && inmuebles.contains(obj) && inmuebles.isEmpty()) {
+                throw new YaExisteInmuebleException();
             }
+            inmuebles.add(obj);
         } catch (YaExisteInmuebleException e) {
             System.out.println("\n\nYaExisteInmuebleException");
         } finally {

@@ -1,0 +1,17 @@
+Las colecciones nos brindan method que podemos usar.
+
+Collection Lista<Integer> lista - ArrayList<Integer>();
+Collection Lista<Double> lista - ArrayList<Double>();
+Collection Lista<Character> lista - ArrayList<Character>();
+Collection Lista<String> lista - ArrayList<String>();
+Collection Lista<Boolean> lista - ArrayList<Boolean>();
+Collection Lista<Objeto> lista - ArrayList<Objeto>();
+
+1. lista.isEmpty() -> Determina si la lista esta vacia. Así mismo da de respuesta un boolean
+2. lista.clear() -> Realiza la limpieza total de la colección.
+3. lista.size() -> Valida que la colección sea mayor a 0, y muestra la cantidad de la lista.
+4. lista.contains -> Devuelve un boolean, realiza una busqueda en toda la colección.
+5. lista.add() -> Agregas un elemento
+6. lista.addAll() -> Agregas todos los elementos de una colección.
+7. lista.add(index, obj) -> Selecciónas la posicion donde se guarde tu objeto o elemento ingresado.
+8. lista.get() -> Obtiene la posición de la lista

@@ -30,18 +30,22 @@ public class InmuebleTechado extends Inmueble implements Imprimible, Constantes 
     }
 
     /**
-     * Se sobre escribe el metodo, este metodo toma los valores principales del super().
+     * Metodo beneficio Obtenido
      *
      * @param comision
      * @return
      */
     @Override
     public Double beneficioObtenido(Double comision) {
-        if (super.isVendido() || super.isReservado()) {
-            return super.getPrecio() * comision;
+        if (this.tienePiscina == true && this.tieneCochera == false) {
+            return super.beneficioObtenido(comision + COMISION_PISCINA);
+        } else if (this.tieneCochera == true) {
+            return super.beneficioObtenido(comision + COMISION_COCHERA);
+        } else {
+            return super.beneficioObtenido(comision);
         }
-        return comision;
     }
+
 
     /**
      * Se imprime los atributos de la clase

@@ -19,6 +19,9 @@ public class TestInmobiliaria {
 
         inmobiliaria.imprimirDatos(); // Por primera ves se imprimen los dos objetos ingresado
 
+        inmuebleTechado.beneficioObtenido(0.15); // Se utiliza el beneficio en el obj de inmueble techado para aumentar la comisión.
+        inmueble.beneficioObtenido(0.14); // Se utilza el beneficio en el obj.
+
         System.out.println("\n\t*** Resultado de Beneficios ****");
         System.out.println("\nBeneficio Esperado: " + inmobiliaria.beneficioEsperado());
         System.out.println("\nBeneficio Obtenido: " + inmobiliaria.beneficioObtenido());

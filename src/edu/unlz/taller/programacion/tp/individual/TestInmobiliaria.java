@@ -44,9 +44,6 @@ public class TestInmobiliaria {
         System.out.println("\n************************Se agrega nuevo inmueble");
 
 
-
-
-
     }
 
 }

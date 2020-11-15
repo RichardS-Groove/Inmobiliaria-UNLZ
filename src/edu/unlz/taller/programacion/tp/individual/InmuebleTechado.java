@@ -30,13 +30,17 @@ public class InmuebleTechado extends Inmueble implements Imprimible, Constantes 
     }
 
     /**
-     * Se implementa un metodo para poder agregar o cambiar la comisión.
-     * 
+     * Se sobreescribe el metodo para poder ser usado con inmueble Techado !
+     *
      * @param comision
      * @return
      */
+    @Override
     public Double beneficioObtenido(Double comision) {
-        return this.getPrecio() * comision;
+        if (super.isVendido() || super.isReservado()) {
+            return super.getPrecio() * comision;
+        }
+        return comision;
     }
 
     /**

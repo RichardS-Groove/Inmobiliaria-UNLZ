@@ -55,7 +55,10 @@ public class Inmueble implements Imprimible {
      * @return
      */
     public Double beneficioObtenido(Double comision) {
-        return this.precio * comision;
+        if (this.isVendido() || this.isReservado()) {
+            return this.precio * comision;
+        }
+        return comision;
     }
 
 

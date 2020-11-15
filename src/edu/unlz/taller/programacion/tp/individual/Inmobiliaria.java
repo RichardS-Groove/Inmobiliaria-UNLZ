@@ -36,22 +36,18 @@ public class Inmobiliaria extends Exception implements Imprimible, Constantes {
      */
     public void agregarInmueble(Inmueble inmueble) throws YaExisteInmuebleException {
         try {
-            agregarInmuebleThrows(inmueble);
+            if (inmueble != null) {
+                for (Inmueble x : this.inmuebles) {
+                    if (x.contains(inmueble)) {
+                        throw new YaExisteInmuebleException();
+                    }
+                }
+                inmuebles.add(inmueble);
+            }
         } catch (YaExisteInmuebleException e) {
             System.out.println("\n\nYaExisteInmuebleException");
         } finally {
-        }
-
-    }
-
-    public void agregarInmuebleThrows(Inmueble inmueble) throws YaExisteInmuebleException {
-        if (inmueble != null) {
-            for (Inmueble x : this.inmuebles) {
-                if (x.contains(inmueble)) {
-                    throw new YaExisteInmuebleException();
-                }
-            }
-            inmuebles.add(inmueble);
+            System.out.println("");
         }
 
     }
